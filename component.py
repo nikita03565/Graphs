@@ -1,3 +1,4 @@
+from graph import Graph
 # Find Strongly Connected Components using Kosaraju's algorithm
 # Kosaraju's algorithm works as follows:
 #
@@ -48,6 +49,3 @@ def scc(g):
             search_stack.remove(v)
         results.append(scc_stack)
     return results
-
-
-

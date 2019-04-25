@@ -19,11 +19,11 @@ class Graph(object):
         """ returns the vertices of a graph """
         return list(self.graph_dict.keys())
 
-    def edges_direcred(self):
+    def edges_directed(self):
         """ returns the edges of a graph """
         return self.__generate_edges_directed()
 
-    def edges_undirecred(self):
+    def edges_undirected(self):
         """ returns the edges of a graph """
         return self.__generate_edges_undirected()
 
@@ -88,6 +88,94 @@ class Graph(object):
                 x, *y = line.split()
                 #print(x, y)
                 self.graph_dict[x] = y
+
+    def vertex_degree(self, vertex):
+        """ The degree of a vertex is the number of edges connecting
+            it, i.e. the number of adjacent vertices. Loops are counted
+            double, i.e. every occurence of vertex in the list
+            of adjacent vertices. """
+        adj_vertices = self.graph_dict[vertex]
+        degree = len(adj_vertices) + adj_vertices.count(vertex)
+        return degree
+
+    def degree_sequence(self):
+        """ calculates the degree sequence """
+        seq = []
+        for vertex in self.graph_dict:
+            seq.append(self.vertex_degree(vertex))
+        seq.sort(reverse=True)
+        return tuple(seq)
+
+    @staticmethod
+    def is_degree_sequence(sequence):
+        """ Method returns True, if the sequence "sequence" is a
+            degree sequence, i.e. a non-increasing sequence.
+            Otherwise False is returned.
+        """
+        # check if the sequence sequence is non-increasing:
+        return all(x >= y for x, y in zip(sequence, sequence[1:]))
+
+    def delta(self):
+        """ the minimum degree of the vertices """
+        min = 100000000
+        for vertex in self.graph_dict:
+            vertex_degree = self.vertex_degree(vertex)
+            if vertex_degree < min:
+                min = vertex_degree
+        return min
+
+    def Delta(self):
+        """ the maximum degree of the vertices """
+        max = 0
+        for vertex in self.graph_dict:
+            vertex_degree = self.vertex_degree(vertex)
+            if vertex_degree > max:
+                max = vertex_degree
+        return max
+
+    '''def density(self):
+        """ method to calculate the density of a graph """
+        g = self.graph_dict
+        V = len(g.keys())
+        E = len(self.edges())
+        return 2.0 * E / (V * (V - 1))'''
+
+    def find_all_paths(self, start_vertex, end_vertex, path=[]):
+        """ find all paths from start_vertex to
+            end_vertex in graph """
+        graph = self.graph_dict
+        path = path + [start_vertex]
+        if start_vertex == end_vertex:
+            return [path]
+        if start_vertex not in graph:
+            return []
+        paths = []
+        for vertex in graph[start_vertex]:
+            if vertex not in path:
+                extended_paths = self.find_all_paths(vertex,
+                                                     end_vertex,
+                                                     path)
+                for p in extended_paths:
+                    paths.append(p)
+        return path
+
+    def diameter(self):
+        """ calculates the diameter of the graph """
+
+        v = self.vertices()
+        pairs = [(v[i], v[j]) for i in range(len(v)) for j in range(i + 1, len(v) - 1)]
+        smallest_paths = []
+        for (s, e) in pairs:
+            paths = self.find_all_paths(s, e)
+            smallest = sorted(paths, key=len)[0]
+            smallest_paths.append(smallest)
+
+        smallest_paths.sort(key=len)
+
+        # longest path is at the end of list,
+        # i.e. diameter corresponds to the length of this path
+        diameter = len(smallest_paths[-1]) - 1
+        return diameter
 
     def __str__(self):
         res = "vertices: "
