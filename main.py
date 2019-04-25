@@ -1,5 +1,9 @@
-import networkx as nx
-import matplotlib.pyplot as plt
+from graph import Graph
 
+g = Graph()
+g.read_adj_list(filename="graph_list.csv")
 
-graph = nx.read_gexf('vk-friends-164285180.gexf')
+scc = g.get_strongly_connected_components_iterative()
+for s in scc:
+    print(len(s), s)
+
