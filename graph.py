@@ -1,6 +1,3 @@
-from networkx import strongly_connected_components, weakly_connected_components
-
-
 class Graph(object):
 
     def __init__(self, graph_dict=None):
@@ -176,6 +173,16 @@ class Graph(object):
         # i.e. diameter corresponds to the length of this path
         diameter = len(smallest_paths[-1]) - 1
         return diameter
+
+    def to_undirected(self):
+        graph = Graph()
+        vert = self.vertices()
+        edges = self.edges_undirected()
+        for v in vert:
+            graph.add_vertex(v)
+        for e in edges:
+            graph.add_edge(e)
+        return graph
 
     def __str__(self):
         res = "vertices: "

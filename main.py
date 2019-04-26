@@ -1,23 +1,5 @@
+from task1 import do_task1
+from task2 import do_task2
 from graph import Graph
-from component import wcc, scc
-
-g = Graph()
-g.read_adj_list(filename="graph_list.csv")
-
-results = [sorted(result) for result in scc(g)]
-results.sort(key=lambda result: result[0])
-print("Number of strongly connected components: ", len(results))
-print("Count, Percantage, Component")
-for result in results:
-    print(len(result), "(" + str(len(result)/len(g.vertices()) * 100.0) + "%)", result)
-
-
-cc = [c for c in wcc(g)]
-#largest_cc = cc[0]
-results = [sorted(result) for result in cc]
-results.sort(key=lambda result: result[0])
-print("Number of weakly connected components: ", len(results))
-print("Count, Percantage, Component")
-for result in results:
-    print(len(result), "(" + str(len(result)/len(g.vertices()) * 100.0) + "%)", result)
-
+do_task1()
+do_task2()

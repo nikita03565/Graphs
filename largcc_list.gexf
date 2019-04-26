@@ -13,10 +13,6 @@
       <attribute id="8" title="city" type="long" />
       <attribute id="9" title="bdate" type="string" />
     </attributes>
-    <meta>
-      <creator>NetworkX 2.3</creator>
-      <lastmodified>26/04/2019</lastmodified>
-    </meta>
     <nodes>
       <node id="90601" label="Ilya Shirokolobov">
         <attvalues>
