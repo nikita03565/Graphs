@@ -1,4 +1,5 @@
 from graph import Graph
+from networkx import *
 # Find Strongly Connected Components using Kosaraju's algorithm
 # Kosaraju's algorithm works as follows:
 #
@@ -49,3 +50,8 @@ def scc(g):
             search_stack.remove(v)
         results.append(scc_stack)
     return results
+
+
+def wcc(g):
+    g1 = DiGraph(read_gexf("vk-friends-164285180.gexf"))
+    return (g1.subgraph(c) for c in weakly_connected_components(g1))

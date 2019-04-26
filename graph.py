@@ -56,7 +56,7 @@ class Graph(object):
         edges = []
         for vertex in self.graph_dict:
             for neighbour in self.graph_dict[vertex]:
-                edges.append([vertex, neighbour])
+                edges.append((vertex, neighbour))
         return edges
 
     def __generate_edges_undirected(self):
