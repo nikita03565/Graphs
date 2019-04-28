@@ -34,8 +34,7 @@ def eccentricity(g, v=None, sp=None):
 
     if v in g:
         return e[v]
-    else:
-        return e
+    return e
 
 
 def diameter(g, e=None):

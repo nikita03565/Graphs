@@ -1,1 +1,2 @@
 # Graph-Analysis
+[![CodeFactor](https://www.codefactor.io/repository/github/nikita03565/graphs/https://www.codefactor.io/repository/github/robot-lab/projectsfair-backendbadge)](https://www.codefactor.io/repository/github/nikita03565/graphs/)

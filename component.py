@@ -57,7 +57,7 @@ def scc(g):
     gr = g.reverse()
     exploredr = dict.fromkeys(g.graph_dict.keys(), 0)
     # DFS ordered by search_stack
-    while len(search_stack) > 0:
+    while len(search_stack):
         u = search_stack[-1]
         scc_stack = []
         dfs(gr, u, scc_stack, exploredr)

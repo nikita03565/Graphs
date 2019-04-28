@@ -114,28 +114,21 @@ class Graph(object):
 
     def delta(self):
         """ the minimum degree of the vertices """
-        min = 100000000
+        minimum = 100000000
         for vertex in self.graph_dict:
             vertex_degree = self.vertex_degree(vertex)
-            if vertex_degree < min:
-                min = vertex_degree
-        return min
+            if vertex_degree < minimum:
+                minimum = vertex_degree
+        return minimum
 
     def Delta(self):
         """ the maximum degree of the vertices """
-        max = 0
+        maximum = 0
         for vertex in self.graph_dict:
             vertex_degree = self.vertex_degree(vertex)
-            if vertex_degree > max:
-                max = vertex_degree
-        return max
-
-    '''def density(self):
-        """ method to calculate the density of a graph """
-        g = self.graph_dict
-        V = len(g.keys())
-        E = len(self.edges())
-        return 2.0 * E / (V * (V - 1))'''
+            if vertex_degree > maximum:
+                maximum = vertex_degree
+        return maximum
 
     def find_all_paths(self, start_vertex, end_vertex, path=[]):
         """ find all paths from start_vertex to
@@ -149,9 +142,7 @@ class Graph(object):
         paths = []
         for vertex in graph[start_vertex]:
             if vertex not in path:
-                extended_paths = self.find_all_paths(vertex,
-                                                     end_vertex,
-                                                     path)
+                extended_paths = self.find_all_paths(vertex, end_vertex, path)
                 for p in extended_paths:
                     paths.append(p)
         return path
