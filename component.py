@@ -70,7 +70,7 @@ def scc(g):
 
 
 def wcc(g):
-    g = DiGraph(read_gexf("vk-friends-164285180.gexf"))
+    g = DiGraph(read_gexf("data/vk-friends-164285180.gexf"))
     seen = set()
     for v in g:
         if v not in seen:
