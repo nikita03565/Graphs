@@ -3,6 +3,7 @@ from component import wcc, scc
 
 
 def do_task1():
+    print("Task 1")
     g = Graph()
     g.read_adj_list(filename="graph_list.csv")
 

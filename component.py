@@ -1,9 +1,9 @@
 from graph import Graph
-from networkx import *
+from networkx import DiGraph, read_gexf
 # Find Strongly Connected Components using Kosaraju's algorithm
 # Kosaraju's algorithm works as follows:
 #
-# Let G be a directed graph and S be an empty stack.
+# Let g be a directed graph and S be an empty stack.
 # While S does not contain all vertices:
 #   Choose an arbitrary vertex v not in S.
 #   Perform a depth-first search starting at v.
@@ -13,7 +13,7 @@ from networkx import *
 #   Pop the top vertex v from S.
 #   Perform a depth-first search starting at v in the transpose graph.
 #   The set of visited vertices will give the strongly connected component containing v;
-#   record this and remove all these vertices from the graph G and the stack S.
+#   record this and remove all these vertices from the graph g and the stack S.
 
 # Depth first search with postorder append to stack
 
@@ -27,16 +27,33 @@ def dfs(g, u, stack, explored):
     stack.append(u)
 
 
+def plain_bfs_directed(g, source):
+    gsucc = g.succ
+    gpred = g.pred
+
+    seen = set()
+    nextlevel = {source}
+    while nextlevel:
+        thislevel = nextlevel
+        nextlevel = set()
+        for v in thislevel:
+            if v not in seen:
+                yield v
+                seen.add(v)
+                nextlevel.update(gsucc[v])
+                nextlevel.update(gpred[v])
+                
+                
 def scc(g):
     explored = dict.fromkeys(g.graph_dict.keys(), 0)
     results = []
-    # Initial DFS on G
+    # Initial DFS on g
     search_stack = []
     for v, expl in explored.items():
         if not expl and v != list(explored.keys())[0]:
             dfs(g, v, search_stack, explored)
 
-    # Reverse Graph
+    # Reverse graph
     gr = g.reverse()
     exploredr = dict.fromkeys(g.graph_dict.keys(), 0)
     # DFS ordered by search_stack
@@ -53,5 +70,10 @@ def scc(g):
 
 
 def wcc(g):
-    g1 = DiGraph(read_gexf("vk-friends-164285180.gexf"))
-    return (g1.subgraph(c) for c in weakly_connected_components(g1))
+    g = DiGraph(read_gexf("vk-friends-164285180.gexf"))
+    seen = set()
+    for v in g:
+        if v not in seen:
+            c = set(plain_bfs_directed(g, v))
+            yield c
+            seen.update(c)
