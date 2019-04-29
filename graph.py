@@ -82,7 +82,8 @@ class Graph(object):
     def read_adj_list(self, filename):
         with open(filename) as file:
             for line in file:
-                x, *y = line.split()
+                x, y = line.split(sep=",")
+                y = y.split()
                 self.graph_dict[x] = y
 
     def vertex_degree(self, vertex):
