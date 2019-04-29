@@ -10,12 +10,12 @@ def dfs(g, u, stack, explored):
     stack.append(u)
 
 
-def plain_bfs_directed(g, v):
+def plain_bfs_directed(g, u):
     gsucc = g.succ
     gpred = g.pred
 
     seen = set()
-    nextlevel = {v}
+    nextlevel = {u}
     while nextlevel:
         thislevel = nextlevel
         nextlevel = set()
@@ -40,7 +40,7 @@ def scc(g):
     gr = g.reverse()
     exploredr = dict.fromkeys(g.graph_dict.keys(), 0)
     # DFS ordered by search_stack
-    while len(search_stack):
+    while search_stack:
         u = search_stack[-1]
         scc_stack = []
         dfs(gr, u, scc_stack, exploredr)

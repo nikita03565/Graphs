@@ -8,7 +8,7 @@ def common_neighbours(g, u, v):
 def jaccard_coefficient(g, u, v):
     union = set(g[u]) | set(g[v])
     intersection = set(g[u]) & set(g[v])
-    if len(union) == 0:
+    if not union:
         return 0
     return len(intersection) / len(union)
 
