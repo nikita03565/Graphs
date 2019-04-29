@@ -83,7 +83,6 @@ class Graph(object):
         with open(filename) as file:
             for line in file:
                 x, *y = line.split()
-                #print(x, y)
                 self.graph_dict[x] = y
 
     def vertex_degree(self, vertex):
