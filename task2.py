@@ -1,4 +1,3 @@
-from graph import Graph
 import matplotlib.pyplot as plt
 import networkx as nx
 from collections import Counter
@@ -19,7 +18,8 @@ def do_task2():
 
     degrees = sorted([d for n, d in g.degree()], reverse=True)
     degrees = Counter(degrees)
-    plt.hist(degrees.keys(), bins=max(degrees.keys()), weights=[i / len(g.nodes()) for i in degrees.values()], rwidth=0.9)
+    plt.hist(degrees.keys(), bins=max(degrees.keys()), weights=[i / len(g.nodes()) for i in degrees.values()],
+             rwidth=0.9)
     plt.xlabel("Vertex degree")
     plt.ylabel("Probability")
     plt.savefig("outputs/hist.png")

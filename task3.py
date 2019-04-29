@@ -1,5 +1,5 @@
 import networkx as nx
-from similarity import common_neighbors, jaccard_coefficient, adamic_adar_index, preferential_attachment
+from similarity import common_neighbours, jaccard_coefficient, adamic_adar_index, preferential_attachment
 import csv
 
 
@@ -12,7 +12,7 @@ def do_task3():
         neighbors_file = csv.writer(neighbors_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         neighbors_file.writerow([None] + list(nodes))
         for x in nodes:
-            neighbors_file.writerow([x] + [len(common_neighbors(graph, x, y)) if x is not y else '' for y in nodes])
+            neighbors_file.writerow([x] + [len(common_neighbours(graph, x, y)) if x is not y else '' for y in nodes])
 
     with open('outputs/jaccard.csv', mode='w') as jaccard_file:
         jaccard_file = csv.writer(jaccard_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -26,11 +26,11 @@ def do_task3():
         for x in nodes:
             adamic_file.writerow([x] + [adamic_adar_index(graph, x, y) if x is not y else '' for y in nodes])
             
-    with open('outputs/preferential.csv', mode='w') as preferential_file:
-        preferential_file = csv.writer(preferential_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        preferential_file.writerow([None] + list(nodes))
+    with open('outputs/preferential.csv', mode='w') as pref_file:
+        pref_file = csv.writer(pref_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        pref_file.writerow([None] + list(nodes))
         for x in nodes:
-            preferential_file.writerow([x] + [preferential_attachment(graph, x, y) if x is not y else '' for y in nodes])
+            pref_file.writerow([x] + [preferential_attachment(graph, x, y) if x is not y else '' for y in nodes])
 
 
 if __name__ == "__main__":

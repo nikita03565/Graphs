@@ -69,8 +69,11 @@ class Graph(object):
                     edges.append({vertex, neighbour})
         return edges
 
-    # Reverses the directed edges of a graph, returning a new graph
     def reverse(self):
+        """
+        Reverses the directed edges of a graph, returning a new graph
+        :return: Graph with reversed edges
+        """
         graph = {}
         for i, j_list in self.graph_dict.items():
             for j in j_list:
@@ -109,7 +112,6 @@ class Graph(object):
             degree sequence, i.e. a non-increasing sequence.
             Otherwise False is returned.
         """
-        # check if the sequence sequence is non-increasing:
         return all(x >= y for x, y in zip(sequence, sequence[1:]))
 
     def delta(self):
@@ -160,8 +162,6 @@ class Graph(object):
 
         smallest_paths.sort(key=len)
 
-        # longest path is at the end of list,
-        # i.e. diameter corresponds to the length of this path
         diameter = len(smallest_paths[-1]) - 1
         return diameter
 

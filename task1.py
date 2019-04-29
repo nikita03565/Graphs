@@ -14,8 +14,7 @@ def do_task1():
     for result in results:
         print(len(result), "(" + str(len(result)/len(g.vertices()) * 100.0) + "%)", result)
 
-    cc = [c for c in wcc(g)]
-    results = [sorted(result) for result in cc]
+    results = [sorted(result) for result in wcc(g)]
     results.sort(key=lambda result: result[0])
     print("Number of weakly connected components: ", len(results))
     print("Count, Percantage, Component")
