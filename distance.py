@@ -1,22 +1,21 @@
-def single_source_shortest_path_length(g, source, cutoff=None):
-    if cutoff is None:
-        cutoff = float('inf')
-    nextlevel = {source: 1}
-    return dict(single_shortest_path_length(g.adj, nextlevel, cutoff))
+def single_source_shortest_path_length(g, v, depth=None):
+    if depth is None:
+        depth = float('inf')
+    next = {v: 1}
+    return dict(single_shortest_path_length(g.adj, next, depth))
 
 
-def single_shortest_path_length(adj, firstlevel, cutoff):
+def single_shortest_path_length(adj, start, depth):
     seen = {}
     level = 0
-    nextlevel = firstlevel
-
-    while nextlevel and cutoff >= level:
-        thislevel = nextlevel
-        nextlevel = {}
-        for v in thislevel:
+    next = start
+    while next and depth >= level:
+        cur = next
+        next = {}
+        for v in cur:
             if v not in seen:
                 seen[v] = level
-                nextlevel.update(adj[v])
+                next.update(adj[v])
                 yield (v, level)
         level += 1
     del seen

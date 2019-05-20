@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 from collections import Counter
-from distance import diameter, radius, center, periphery, average_shortest_path_length
+from distance import diameter, radius, center, periphery, average_shortest_path_length, single_source_shortest_path_length
 
 
 def do_task2():

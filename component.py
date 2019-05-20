@@ -10,21 +10,18 @@ def dfs(g, u, stack, explored):
     stack.append(u)
 
 
-def plain_bfs_directed(g, u):
-    gsucc = g.succ
-    gpred = g.pred
-
+def bfs(g, u):
     seen = set()
-    nextlevel = {u}
-    while nextlevel:
-        thislevel = nextlevel
-        nextlevel = set()
-        for v in thislevel:
+    next = {u}
+    while next:
+        cur = next
+        next = set()
+        for v in cur:
             if v not in seen:
                 yield v
                 seen.add(v)
-                nextlevel.update(gsucc[v])
-                nextlevel.update(gpred[v])
+                next.update(g.succ[v])
+                next.update(g.pred[v])
                 
                 
 def scc(g):
@@ -57,6 +54,6 @@ def wcc(g):
     seen = set()
     for v in g:
         if v not in seen:
-            c = set(plain_bfs_directed(g, v))
+            c = set(bfs(g, v))
             yield c
             seen.update(c)
